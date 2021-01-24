@@ -5,14 +5,14 @@
     </div>
 
     <div class="filter_block">
-
+	<form class="filter-form" action="filter.php" method="post">
         <div class="filter_container">
 
             <div class="filter_cell">
                 <label>Выбрать жанр</label>
-                <select id="genre">
+                <select name='genre' id="genre">
 
-                     <option value="" disabled selected hidden>По каким жанрам искать</option>
+                     <option value="">По каким жанрам искать</option>
                      <option class="select_option" value="2">Детектив</option>
                      <option class="select_option" value="3">Комедия</option>
                      <option class="select_option" value="4">Фєнтези</option>
@@ -32,7 +32,7 @@
 
             <div class="filter_cell">
                 <label>Тип аниме</label>
-                <select id="genre">
+                <select name='type' id="genre">
 
                     <option value="" disabled selected hidden>Какой тип аниме искать</option>
                     <option class="select_option" value="2">Сериал</option>
@@ -44,26 +44,13 @@
             </div>
 
             <div class="filter_cell">
-                <label>Статус аниме</label>
-
-                <select id="genre">
-
-                    <option value="" disabled selected hidden>Не учитывать</option>
-                    <option class="select_option" value="2">Вышел</option>
-                    <option class="select_option" value="3">Онгоинг</option>
-                    <option class="select_option" value="4">Анонс</option>
-
-                </select>
-            </div>
-
-            <div class="filter_cell">
                 <label>Год</label><br>
-                <input class="year_input mr-2" type="text" placeholder="от"><input class="year_input" type="text" placeholder="до">
+                <input class="year_input mr-2" type="text" name='from' placeholder="от"><input class="year_input" type="text" name='to' placeholder="до">
             </div>
 
             <div class="filter_cell">
                 <label>Возрастной рейтинг</label>
-                <select id="genre">
+                <select name='rating' id="genre">
 
                     <option value="" disabled selected hidden>PG(для детей)</option>
                     <option class="select_option" value="2">Сериал</option>
@@ -76,20 +63,19 @@
 
             <div class="filter_cell">
                 <label>Сортировать по</label>
-                <select id="genre">
-
+                <select name='sort' id="genre">
                     <option value="" disabled selected hidden>Рейтингу</option>
                     <option class="select_option" value="2">Сериал</option>
                     <option class="select_option" value="3">Фильм</option>
                     <option class="select_option" value="4">ОВА</option>
                     <option class="select_option" value="5">Спешл</option>
-
                 </select>
             </div>
 
         </div>
-    </div>
-    <div class="filter_footer"><div class="filter_btn">ИСКАТЬ</div></div>
+	    </div>
+	    <div class="filter_footer"><input value="ИСКАТЬ" type="submit" class="filter_btn"></div>
+	</form>
 
     <div class="video_block">
         <div class="block_header">

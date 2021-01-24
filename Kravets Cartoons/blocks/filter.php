@@ -1,22 +1,22 @@
-<section>
+<section class="help">
     <div class="container">
 
         <div class="flex_wrap">
-            <div class="content_wrap catalog-section">
-
-            <span class="catalog-title">Топ-100 аниме</span>
-            
-                <div class="catalog-grid">
-                <?php
-                    $user = 'root';
-                    $db = 'anime';
-                    $host = 'localhost';
-
-                    $pdo = new PDO('mysql:host=localhost;dbname=anime',$user);
-
-                    $sql = 'SELECT * FROM `animeitem` ORDER BY `id`';
+	    <div class="content_wrap catalog-section">
+	    <?php
+		var_dump($_POST['genre']);
+		$count = 0;
+		$pdo = new PDO('mysql:host=localhost;dbname=anime','root');
+                    $sql = "SELECT COUNT(*) as count FROM `animeitem` WHERE `title` LIKE '%$search%'";
                     $query = $pdo->prepare($sql);
                     $query->execute();
+		    $count = $query->fetch(PDO::FETCH_ASSOC);
+		    $cnt = $count['count'];
+		    echo "<h4>Найдено $cnt мультик(ов).</h1>";
+                    $sql = "SELECT * FROM `animeitem` WHERE `title` LIKE '%$search%'"; 
+                    $query = $pdo->prepare($sql);
+                    $query->execute();
+		    echo "<div class=\"catalog-grid\">";
                         while($row = $query->fetch(PDO::FETCH_OBJ)) {
                             echo "
                                 <div class='catalog-content_block'>
@@ -34,19 +34,16 @@
                                 ";
                         }
                     
-
-                     ?>
-
-                </div>
-            </div>
-
-            <?php require 'blocks/aside.php'; ?>
-
-        </div>
-
-
-
-    </div>
+		    if($cnt == 0)
+		    {
+			echo "<p>К сожалению, по вашему запросу ничего не найдено. Попробуйте указать другое название.</p>";
+		    }
+                     ?>	    
+		</div>
+	    </div>
+	    <?php require 'blocks/aside.php'; ?>
+</div>
 
 
 </section>
+

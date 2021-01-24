@@ -121,16 +121,32 @@ main{
 }
 
 .search{
-    border: 1px solid #acadad;
+    color: #eee;
     padding: 15px 45px 15px 20px;
+    border: 1px solid #444;
+    height: 50px;
+    width: 100%;
     background: #333;
     font-weight: 300;
     font-style: italic;
     font-size: 14px;
     transition: .3s;
-    height: 50px;
-    width: 100%;
-    
+}
+
+#search_form{
+    display: flex;
+    position: relative;
+}
+
+.search-btn{
+    position: absolute;
+    background: url(../../img/search.png) no-repeat;
+    width: 24px;
+    height: 24px;
+    right: 13px;
+    top: 13px;
+    padding: 0;
+    border: none;
 }
 .slider{
     margin-bottom: 15px;

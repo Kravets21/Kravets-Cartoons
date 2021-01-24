@@ -77,11 +77,11 @@
                             <a class="nav-link" data-value="main" href="index.php">ГЛАВНАЯ</a>
 			</li>
                         <li <?php if ($current_page == "catalog.php") {echo 'id="active"';}?> class="nav-item" >
-                            <a class="nav-link catalog"  data-value="catalog" href="catalog.php">КАТАЛОГ</a>
+                            <a class="nav-link catalog"  data-value="catalog" href="catalog.php?page=1">КАТАЛОГ</a>
                             <div class="submenu">
-                                <a href="catalog.php">Каталог аниме</a>
-                                <a href="news.php">Новости</a>
-                                <a href="anons.php">Анонсы</a>
+                                <a href="catalog.php?page=1">Каталог аниме</a>
+                                <a href="news.php?page=1">Новости</a>
+                                <a href="anons.php?page=1">Анонсы</a>
                             </div>
                         </li>
                         <li <?php if ($current_page == "top.php") {echo 'id="active"';}?> class="nav-item">
@@ -104,7 +104,8 @@
     </header>
 
 <div class="container">
-    <div id="input_block" class="d-flex p-2 bd-highlight mt-3 mb-3">
-        <input autocomplete="off" class="search" name="word" type="text" placeholder="НАЙТИ АНИМЕ ПО НАЗВАНИЮ" value="">
-    </div>
+    <form action="search.php" id="search_form" class="mt-3" method="GET">
+	<input required minlength="3" autocomplete="off" class="search" name="word" type="search" placeholder="НАЙТИ АНИМЕ ПО НАЗВАНИЮ" value="">
+	    <input type="submit" class="search-btn" value="">
+	</form>
 </div>

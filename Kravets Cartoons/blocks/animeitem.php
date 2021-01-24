@@ -3,7 +3,7 @@
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $url = $_SERVER['REQUEST_URI'];
     $parts = parse_url($url); 
-    parse_str($parts['query'], $get_arguments); // получаем айди мультика из url
+    parse_str($parts['query'], $get_arguments); // получаем айди мультика из url, так как через обычный ГЕТ будет null
     $id = $get_arguments['id'];
     $sql = 'SELECT * FROM `animeitem` WHERE `id` = :id';
 	try {

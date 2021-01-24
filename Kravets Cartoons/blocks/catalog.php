@@ -7,37 +7,59 @@
                     <span class="catalog-title">Каталог</span>
 
                     <ul class="pagination">
-
-                        <li class="disabled next"><a href="/catalog?page=2" rel="next"> </a>
-                        </li>
-
-                        <li class="active"><a href="/catalog?page=1">1</a></li>
-                        <li data-pos="1"><a href="/catalog?page=2">2</a></li>
-                        <li data-pos="2"><a href="/catalog?page=3">3</a></li>
-                        <li data-pos="3"><a href="/catalog?page=4">4</a></li>
-                        <li data-pos="4"><a href="/catalog?page=5">5</a></li>
-                        <li data-pos="5"><a href="/catalog?page=6">6</a></li>
-                        <li data-pos="6"><a href="/catalog?page=7">7</a></li>
-                        <li data-pos="7"><a href="/catalog?page=8">8</a></li>
-
-                        <li class="disabled"><span>...</span></li>
-
-                        <li data-pos="181"><a href="/catalog?page=182">182</a></li>
-                        <li data-pos="182"><a href="/catalog?page=183">183</a></li>
-
-
-                        <li class="next"><a href="/catalog?page=2" rel="next">></a></li>
+			<?php 
+			$pdo = new PDO('mysql:host=localhost;dbname=anime','root');
+			$url = $_SERVER['REQUEST_URI'];
+			$parts = parse_url($url); 
+			if(isset($parts['query']))
+			{
+			    parse_str($parts['query'], $get_arguments);
+			    $page = $get_arguments['page']; // получаем номер странички из url, так как через обычный ГЕТ будет null 
+			}
+			else
+			{
+			    $page = 1;
+			}
+			
+			$items_on_page = 16; // сколько на одной страничке будет мультиков
+			$from = ($page - 1) * $items_on_page; // формула для показа С КАКОГО мультика начинать на след страничке
+			$sql = "SELECT COUNT(*) as count FROM `animeitem`"; 
+			$query = $pdo->prepare($sql);
+			$query->execute();
+			$count = $query->fetch(PDO::FETCH_ASSOC); // кол-во мультиков ВСЕГО
+			$page_numbers = ceil($count['count']/ $items_on_page); // сколько у нас будет страничек для пагинации
+			$prev = $page-1;
+			$next = $page+1;
+			if($page != 1)
+			{
+			    echo "<li class=\"disabled next\"><a href=\"catalog.php?page=$prev\"> < </a></li>";
+			}
+			for($i = 1; $i <= $page_numbers; $i++)
+			{
+			    if($page == $i)
+			    {
+				$class = ' class="active"';
+			    }
+			    else
+			    {
+				$class = '';
+			    }
+			    echo "<li$class><a href=\"catalog.php?page=$i\">$i</a></li>";
+			}
+			if($page != $page_numbers)
+			{
+			   echo "<li class=\"disabled next\"><a href=\"catalog.php?page=$next\"> > </a></li>"; 
+			}
+			?>		    
                     </ul>
 
                     <div class="catalog-grid">
                     <?php
-                    $user = 'root';
-                    $pdo = new PDO('mysql:host=localhost;dbname=anime',$user);
+                    
 
-                    $sql = 'SELECT * FROM `animeitem` ORDER BY `id` DESC';
+                    $sql = "SELECT * FROM `animeitem` ORDER BY `id` DESC LIMIT $from, $items_on_page"; 
                     $query = $pdo->prepare($sql);
                     $query->execute();
-                    for($i=0;$i<=3;$i++){
                         while($row = $query->fetch(PDO::FETCH_OBJ)) {
                             echo "
                                 <div class='catalog-content_block'>
@@ -54,34 +76,35 @@
                                 </div>
                                 ";
                         }
-                    }
+                    
 
                      ?>
                     </div>
                     
 
                     <ul class="pagination">
-
-                        <li class="disabled next"><a href="/catalog?page=2" rel="next">
-                                </a>
-                        </li>
-
-                        <li class="active"><a href="/catalog?page=1">1</a></li>
-                        <li data-pos="1"><a href="/catalog?page=2">2</a></li>
-                        <li data-pos="2"><a href="/catalog?page=3">3</a></li>
-                        <li data-pos="3"><a href="/catalog?page=4">4</a></li>
-                        <li data-pos="4"><a href="/catalog?page=5">5</a></li>
-                        <li data-pos="5"><a href="/catalog?page=6">6</a></li>
-                        <li data-pos="6"><a href="/catalog?page=7">7</a></li>
-                        <li data-pos="7"><a href="/catalog?page=8">8</a></li>
-
-                        <li class="disabled"><span>...</span></li>
-
-                        <li data-pos="181"><a href="/catalog?page=182">182</a></li>
-                        <li data-pos="182"><a href="/catalog?page=183">183</a></li>
-
-
-                        <li class="next"><a href="/catalog?page=2" rel="next">></a></li>
+			<?php 
+			if($page != 1)
+			{
+			    echo "<li class=\"disabled next\"><a href=\"catalog.php?page=$prev\"> < </a></li>";
+			}
+			for($i = 1; $i <= $page_numbers; $i++)
+			{
+			    if($page == $i)
+			    {
+				$class = ' class="active"';
+			    }
+			    else
+			    {
+				$class = '';
+			    }
+			    echo "<li$class><a href=\"catalog.php?page=$i\">$i</a></li>";
+			}
+			if($page != $page_numbers)
+			{
+			   echo "<li class=\"disabled next\"><a href=\"catalog.php?page=$next\"> > </a></li>"; 
+			}
+			?>
                     </ul>
                 </div>
 
