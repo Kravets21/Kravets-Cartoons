@@ -1,6 +1,6 @@
     $('#reg_user').click(function () {
-    var name = $('#email2').val();
-    var password = $('#password2').val();
+    let name = $('#email2').val();
+    let password = $('#password2').val();
     
     $.ajax({
     url: 'ajax/reg.php',

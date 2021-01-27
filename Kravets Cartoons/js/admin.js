@@ -1,6 +1,6 @@
            function hideOtherAdminForms(form){
 	    $(form).click(function (e) {
-            var exept = "form:not("+form+"_form)";
+            let exept = "form:not("+form+"_form)";
             $(exept).removeClass("open");
             $(form+"_form").addClass('open');
             });
@@ -14,14 +14,14 @@
 	   hideOtherAdminForms(".news_edit");
 	   
 	    $('.add_anime_form button').click(function () {
-                var title = $('#title').val();
-                var year = $('#year').val();
-                var genre = $('#genre').val();
-                var author = $('#author').val();
-                var rating = $('#rating').val();
-                var description = $('#description').val();
-		var poster = $("#poster");
-		var fd = new FormData;
+                let title = $('#title').val();
+                let year = $('#year').val();
+                let genre = $('#genre').val();
+                let author = $('#author').val();
+                let rating = $('#rating').val();
+                let description = $('#description').val();
+		let poster = $("#poster");
+		let fd = new FormData;
 		fd.append('poster', poster.prop('files')[0]);
 		const file_input = document.querySelector('input[type=file]');
 		const path = file_input.value;
@@ -68,7 +68,7 @@
 
 
             $('.delete_anime_form button').click(function () {
-            var title = $('#titledel').val();
+            let title = $('#titledel').val();
             $.ajax({
                 url: 'ajax/delete.php',
                 type: "POST",
@@ -97,7 +97,7 @@
             });
 
             $('.ban_user_form button').click(function () {
-            var name = $('#name').val();
+            let name = $('#name').val();
             $.ajax({
                 url: 'ajax/ban.php',
                 type: "POST",
@@ -126,7 +126,7 @@
             });
 	    
             $('.aside_edit_form button').click(function () {
-            var name = $('#name').val();
+            let name = $('#name').val();
             $.ajax({
                 url: 'ajax/ban.php',
                 type: "POST",

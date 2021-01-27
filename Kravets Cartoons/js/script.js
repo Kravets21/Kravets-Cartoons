@@ -1,7 +1,7 @@
 $('#auth_user').click(function ()
 {
-    var name = $('#email').val();
-    var password = $('#password').val();
+    let name = $('#email').val();
+    let password = $('#password').val();
     
 
     $.ajax({
@@ -51,7 +51,7 @@ $('#auth_user').click(function ()
   });
 
   $(window).scroll(function() {
-    var height = $(window).scrollTop();
+    let height = $(window).scrollTop();
     if (height > 900) {
         $('#back2Top').fadeIn();
     } else {
